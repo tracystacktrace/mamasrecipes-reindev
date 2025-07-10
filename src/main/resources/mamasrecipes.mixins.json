@@ -4,5 +4,7 @@
   "package": "net.tracystacktrace.mamasrecipes.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "MixinShapedRecipes",
+    "MixinShapelessRecipes"
   ]
 }

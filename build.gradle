@@ -13,9 +13,17 @@ apply plugin: 'foxloader.dev'
 group = 'net.tracystacktrace'
 version = '0.1'
 
+configurations {
+    implAndInclude
+    implAndInclude.transitive = false
+    implementation.extendsFrom(implAndInclude)
+}
+
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    implAndInclude 'com.github.tracystacktrace:mamasrecipes:791469d71b'
 }
 
 test {
@@ -23,6 +31,19 @@ test {
 }
 
 jar {
+    from(provider {
+        configurations.implAndInclude.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }) {
+        exclude 'META-INF/MANIFEST.MF'
+        exclude 'META-INF/*.SF'
+        exclude 'META-INF/*.DSA'
+        exclude 'META-INF/*.RSA'
+        exclude '**/package-info.class'
+        exclude '**/module-info.class'
+        exclude 'assets/*/icon.png'
+    }
     from "LICENSE"
 }
 
@@ -33,6 +54,6 @@ foxloader {
     modVersion = project.version
     modAuthors = "tracystacktrace"
     modWebsite = "https://github.com/Fox2Code/FoxLoaderExampleMod"
-    modMain = "net.tracystacktrace.mamasrecipes.ExampleMod"
+    modMain = "net.tracystacktrace.mamasrecipes.MamasRecipes"
     modDesc("This is an example mod for FoxLoader 2.0")
 }
