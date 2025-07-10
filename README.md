@@ -1,11 +1,13 @@
-# Fox Loader Example Mod
+# Mama's Recipes (FoxLoader)
 
-Example mod for [FoxLoader](https://github.com/Fox2Code/FoxLoader)
+Still in progres... just wait some time, `^o^`
 
-Rat block texture by [@silveros](https://github.com/silverosre)
+A FoxLoader (ReIndev) modification designed to provide fetch-able JSON recipes support!
 
-## Documentation
+Uses [core library](https://github.com/tracystacktrace/mamasrecipes) to provide JSON recipes parse and load functions.
 
-For mixins usage check here: https://github.com/2xsaiko/mixin-cheatsheet
+## License
 
-For spark usage check here: https://spark.lucko.me/docs/Command-Usage
+The mod is licensed under [Apache License 2.0](https://github.com/tracystacktrace/mamasrecipes-reindev/blob/main/LICENSE).
+
+The core library `mamasrecipes` is licensed under [GNU Lesser General Public License Version 2.1](https://github.com/tracystacktrace/mamasrecipes/blob/master/LICENSE).

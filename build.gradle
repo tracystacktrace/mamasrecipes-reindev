@@ -53,7 +53,11 @@ foxloader {
     modIcon = "assets/mamasrecipes/icon.png"
     modVersion = project.version
     modAuthors = "tracystacktrace"
-    modWebsite = "https://github.com/Fox2Code/FoxLoaderExampleMod"
+    modWebsite = "https://github.com/tracystacktrace/mamasrecipes-reindev"
     modMain = "net.tracystacktrace.mamasrecipes.MamasRecipes"
-    modDesc("This is an example mod for FoxLoader 2.0")
+    modDesc("\u00A7eSupport for JSON recipes!")
+    modDesc()
+    modDesc("\u00A76License: \u00A7aApache License 2.0")
+    modDesc("\u00A76License (Core): \u00A7aGNU LGPL v2.1")
+    modDesc("\u00A76Sources: \u00A79https://github.com/tracystacktrace/mamasrecipes-reindev")
 }

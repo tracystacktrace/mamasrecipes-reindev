@@ -2,7 +2,7 @@ package net.tracystacktrace.mamasrecipes;
 
 import com.fox2code.foxloader.config.ConfigEntry;
 import com.fox2code.foxloader.loader.Mod;
-import net.minecraft.client.Minecraft;
+import com.fox2code.foxloader.loader.ModLoader;
 import net.minecraft.common.item.ItemStack;
 import net.tracystacktrace.mamasrecipes.bridge.MainBridge;
 import net.tracystacktrace.mamasrecipes.constructor.item.ItemDescription;
@@ -24,7 +24,7 @@ public class MamasRecipes extends Mod {
     @Override
     public void onPostInit() {
         if (MamasRecipes.CONFIG.readLocalFolder) {
-            final File recipesFolder = new File(Minecraft.getInstance().getMinecraftDir(), "mamasrecipes");
+            final File recipesFolder = new File(ModLoader.getConfigFolder(), "mamasrecipes");
             try {
                 final FolderRecipesCrawler crawler = FolderRecipesCrawler.fromFolder(recipesFolder);
                 if (crawler != null) {
@@ -45,7 +45,7 @@ public class MamasRecipes extends Mod {
     }
 
     public static class MamasRecipesConfig {
-        @ConfigEntry(configName = "Read from folder")
+        @ConfigEntry(configComment = "Read from local folder")
         public boolean readLocalFolder = true;
     }
 }
