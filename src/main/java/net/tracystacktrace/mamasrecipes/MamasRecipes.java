@@ -47,11 +47,10 @@ public class MamasRecipes extends Mod {
     public static Object convertLoose(ItemDescription description) {
         final String id = description.getItemIdentifier();
         //process oreDict
-        if (id.startsWith("oreDict:")) {
+        if (id.startsWith("$oreDict:")) {
             final String data = id.split(":")[1];
             return ReIndevOreDict.getFromList(data);
         }
-
         return convertStrict(description);
     }
 

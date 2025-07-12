@@ -1,4 +1,4 @@
-package net.tracystacktrace.mamasrecipes.mixins;
+package net.tracystacktrace.mamasrecipes.mixins.recipes;
 
 import net.minecraft.common.recipe.TaggedIngredient;
 import net.minecraft.common.recipe.TaggedIngredients;

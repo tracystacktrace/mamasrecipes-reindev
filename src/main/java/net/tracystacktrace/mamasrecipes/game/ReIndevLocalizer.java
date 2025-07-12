@@ -79,10 +79,10 @@ public class ReIndevLocalizer implements IEnvironment {
         }
 
         //ore dict detection
-        if(name.startsWith("reindev:")) {
+        if (name.startsWith("reindev:")) {
             final String data = name.split(":")[1];
-            if(ReIndevOreDict.validateOreDict(data)) {
-                return "oreDict:" + data;
+            if (ReIndevOreDict.validateOreDict(data)) {
+                return "$oreDict:" + data;
             }
         }
 
@@ -153,7 +153,7 @@ public class ReIndevLocalizer implements IEnvironment {
             }
         }
 
-        System.out.println(recipe.getType() + " -> " + recipe.getName());
+        System.out.println("UNKNOWN " + recipe.getType() + " -> " + recipe.getName());
     }
 
     @Override

@@ -1,4 +1,4 @@
-package net.tracystacktrace.mamasrecipes.mixins;
+package net.tracystacktrace.mamasrecipes.mixins.recipes;
 
 import net.minecraft.common.entity.inventory.InventoryCrafting;
 import net.minecraft.common.item.ItemStack;
