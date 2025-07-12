@@ -23,7 +23,7 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 
-    implAndInclude 'com.github.tracystacktrace:mamasrecipes:791469d71b'
+    implAndInclude 'com.github.tracystacktrace:mamasrecipes:39ff053b2e'
 }
 
 test {

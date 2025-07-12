@@ -3,38 +3,50 @@ package net.tracystacktrace.mamasrecipes.game;
 import com.fox2code.foxloader.registry.GameRegistry;
 import com.google.gson.JsonObject;
 import net.minecraft.common.item.Item;
+import net.minecraft.common.item.ItemStack;
 import net.minecraft.common.item.Items;
 import net.minecraft.common.recipe.CraftingManager;
 import net.tracystacktrace.mamasrecipes.MamasRecipes;
-import net.tracystacktrace.mamasrecipes.bridge.ILocalization;
+import net.tracystacktrace.mamasrecipes.bridge.IEnvironment;
 import net.tracystacktrace.mamasrecipes.constructor.RecipeProcessException;
+import net.tracystacktrace.mamasrecipes.constructor.item.ItemDescription;
 import net.tracystacktrace.mamasrecipes.constructor.item.KeyedItemDescription;
 import net.tracystacktrace.mamasrecipes.constructor.recipe.IRecipeDescription;
-import net.tracystacktrace.mamasrecipes.constructor.recipe.RecipeFurnace;
+import net.tracystacktrace.mamasrecipes.constructor.recipe.RecipeDirectProcessing;
 import net.tracystacktrace.mamasrecipes.constructor.recipe.RecipeShaped;
 import net.tracystacktrace.mamasrecipes.constructor.recipe.RecipeShapeless;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.Map;
+import java.util.Objects;
 
-public class ReIndevLocalizer implements ILocalization {
-    @Override
-    public @Nullable Integer getIDFromName(@NotNull String name) {
-        //this is a protection from those who would push an int id as string
-        if(name.matches("\\d+")) {
-            try {
-                final int rawID = Integer.parseInt(name);
-                if(rawID < 1) {
-                    return null;
-                }
-                final Item targetItem = Items.ITEMS_LIST[rawID];
-                return targetItem != null ? targetItem.itemID : null;
-            } catch (ArrayIndexOutOfBoundsException | NullPointerException | NumberFormatException e) {
+public class ReIndevLocalizer implements IEnvironment {
+
+    private @Nullable Integer processIntegerName(@NotNull String name) {
+        try {
+            final int rawID = Integer.parseInt(name);
+            if (rawID < 1) {
                 return null;
             }
+            final Item targetItem = Items.ITEMS_LIST[rawID];
+            return targetItem != null ? targetItem.itemID : null;
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException | NumberFormatException e) {
+            return null;
         }
+    }
 
+    private @Nullable Integer processVanillaName(@NotNull String name, int meta, int count) {
+        return Arrays.stream(Items.ITEMS_LIST)
+                .filter(Objects::nonNull)
+                .filter(i -> name.equals(i.getItemNameIS(new ItemStack(i.itemID, meta, count))) || name.equals(i.getItemName()))
+                .findFirst()
+                .map(i -> i.itemID)
+                .orElse(null);
+    }
+
+    private @Nullable Integer processPrefixedName(@NotNull String name) {
         //main code
         String prefix = "reindev"; //default
         String suffix;
@@ -56,8 +68,22 @@ public class ReIndevLocalizer implements ILocalization {
     }
 
     @Override
+    public @Nullable Integer getItemIDFromName(@NotNull String name, int meta, int count) {
+        //this is a protection from those who would push an int id as string
+        if (name.matches("\\d+")) {
+            return this.processIntegerName(name);
+        }
+
+        if(name.startsWith("tile.") || name.startsWith("item.")) {
+            return this.processVanillaName(name, meta, count);
+        }
+
+        return this.processPrefixedName(name);
+    }
+
+    @Override
     public boolean isValidItemID(int id) {
-        if(id < 1 || id >= Items.ITEMS_LIST.length) {
+        if (id < 1 || id >= Items.ITEMS_LIST.length) {
             return false;
         }
 
@@ -105,8 +131,15 @@ public class ReIndevLocalizer implements ILocalization {
     }
 
     @Override
-    public boolean supportsAttribute(@NotNull String attribute) {
-        return attribute.equals("displayName");
+    public String[] getCustomItemAttributes() {
+        return new String[]{"displayName"};
+    }
+
+    @Override
+    public void processCustomItemAttribute(@NotNull ItemDescription target, @NotNull String attribute, @Nullable Object value) {
+        if (attribute.equals("displayName")) {
+            target.setDisplayName((value instanceof String) ? ((String) value) : String.valueOf(value));
+        }
     }
 
     @Override
@@ -120,8 +153,8 @@ public class ReIndevLocalizer implements ILocalization {
             @NotNull JsonObject object
     ) throws RecipeProcessException {
         return switch (type) {
-            case "forge" -> RecipeFurnace.fromJson(object, "forge");
-            case "refridgifreezer" -> RecipeFurnace.fromJson(object, "refridgifreezer");
+            case "forge" -> RecipeDirectProcessing.fromJson(this, object, "forge");
+            case "refridgifreezer" -> RecipeDirectProcessing.fromJson(this, object, "refridgifreezer");
             default -> null;
         };
     }
