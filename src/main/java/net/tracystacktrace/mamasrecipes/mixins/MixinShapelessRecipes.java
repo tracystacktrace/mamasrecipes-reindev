@@ -16,15 +16,11 @@ public class MixinShapelessRecipes {
     @Final
     private ItemStack output;
 
-    @Inject(method = "getCraftingResult", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "getCraftingResult", at = @At("HEAD"), cancellable = true)
     private void mamasrecipes$injectDisplayName(
             InventoryCrafting craftingInventory,
             CallbackInfoReturnable<ItemStack> cir
     ) {
-        final ItemStack itemStack = cir.getReturnValue();
-        if (this.output.getDisplayName() != null) {
-            itemStack.setItemName(this.output.getDisplayName());
-        }
-        cir.setReturnValue(itemStack);
+        cir.setReturnValue(this.output.copy());
     }
 }
