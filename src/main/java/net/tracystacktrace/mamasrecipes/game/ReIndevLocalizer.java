@@ -21,6 +21,21 @@ import java.util.Map;
 public class ReIndevLocalizer implements ILocalization {
     @Override
     public @Nullable Integer getIDFromName(@NotNull String name) {
+        //this is a protection from those who would push an int id as string
+        if(name.matches("\\d+")) {
+            try {
+                final int rawID = Integer.parseInt(name);
+                if(rawID < 1) {
+                    return null;
+                }
+                final Item targetItem = Items.ITEMS_LIST[rawID];
+                return targetItem != null ? targetItem.itemID : null;
+            } catch (ArrayIndexOutOfBoundsException | NullPointerException | NumberFormatException e) {
+                return null;
+            }
+        }
+
+        //main code
         String prefix = "reindev"; //default
         String suffix;
 
