@@ -1,0 +1,23 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [" XO", "XOX", "WX "],
+  "keys": [
+    {
+      "key": "X",
+      "item": "item.iron_ingot"
+    },
+    {
+      "key": "O",
+      "item": "item.fish.lava_fish",
+      "meta": 1
+    },
+    {
+      "key": "W",
+      "item": "item.iron_sword"
+    }
+  ],
+  "result": {
+    "item": "item.molten_sword",
+    "displayName": "The Destroyer of Fish"
+  }
+}

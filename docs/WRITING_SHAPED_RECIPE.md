@@ -24,11 +24,11 @@ Let's assume we need to create a recipe for a `Molten Sword` with a custom name 
 
 ![](https://github.com/tracystacktrace/mamasrecipes-reindev/raw/main/docs/images/shaped_crafting_1.png)
 
-_Ingredients: 4x Iron Ingot, 2x Lava Fish, 1x Iron Sword_
+_Ingredients: 4x `Iron Ingot`, 2x `Lava Fish`, 1x `Iron Sword`_
 
 ### III. Creating a pattern
 
-Now we need to write a plain-text pattern for this recipe:
+Now let's represent this recipe in a text pattern so we could understand better:
 ```text
  XO
 XOX
@@ -45,6 +45,10 @@ You see something? Yeah, we've just created a pattern for our `.json` recipe:
   "pattern": [" XO", "XOX", "WX "]
 }
 ```
+
+For empty spaces (no item), use a space character (` `).
+
+Please, use uppercase english alphabet character to identify each pattern key (i.e. `A`, `G`, `K`, etc.). Other characters are untested and might be unstable.
 
 ### IV. Getting item descriptor for each item
 
@@ -72,7 +76,7 @@ Assuming you've already read previous guides and [know how to obtain an item des
 }
 ```
 
-**For `Molten Sword` with custom name `The Destroyer of Fish`:**
+**For `Molten Sword` with the custom name `The Destroyer of Fish`:**
 ```json5
 {
   "item": "item.molten_sword",
@@ -145,5 +149,7 @@ Next thing is to simply add everything we created to a combined json file:
 ```
 
 That's all! Now you can test it by putting it in `config/mamasrecipes` folder [(see how)](https://github.com/tracystacktrace/mamasrecipes-reindev/blob/main/docs/WRITING_SHAPED_RECIPE.md).
+
+[Get the `.json` file of this example!](https://github.com/tracystacktrace/mamasrecipes-reindev/blob/main/docs/examples/the_destroyer_of_fish.json)
 
 ![Preview image](https://github.com/tracystacktrace/mamasrecipes-reindev/raw/main/docs/images/shaped_crafting_2.png)

@@ -1,4 +1,16 @@
-## How can I get data about the item and write an item descriptor of it?
+## What's item descriptor? How can I get data about the item and write an item descriptor of it?
+
+What's item descriptor? It's a piece of `JSON` code that describes an item and its' properties (name, metadata, count, etc.). It is primarily used to describe **`inputs`** and **`outputs`** of a recipe.
+
+The full item descriptor instance looks like this:
+```json5
+{
+  "item": "item.cloth.cyan", // item identifier, could be string or int representing id
+  "meta": 9, // item metadata
+  "count": 1, // number of items
+  "displayName": "Custom Item Name" // ReIndev exclusive: display name
+}
+```
 
 ### I. Getting data from the game
 
