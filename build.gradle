@@ -23,7 +23,7 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 
-    implAndInclude 'com.github.tracystacktrace:mamasrecipes:39ff053b2e'
+    implAndInclude 'com.github.tracystacktrace:mamasrecipes:b05d253f7b'
 }
 
 test {
@@ -55,7 +55,7 @@ foxloader {
     modAuthors = "tracystacktrace"
     modWebsite = "https://github.com/tracystacktrace/mamasrecipes-reindev"
     modMain = "net.tracystacktrace.mamasrecipes.MamasRecipes"
-    modDesc("\u00A7eSupport for JSON recipes!")
+    modDesc("\u00A7eSupport for custom JSON recipes!")
     modDesc()
     modDesc("\u00A76License: \u00A7aApache License 2.0")
     modDesc("\u00A76License (Core): \u00A7aGNU LGPL v2.1")

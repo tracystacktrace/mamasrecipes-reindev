@@ -8,6 +8,7 @@ import net.tracystacktrace.mamasrecipes.constructor.item.ItemDescription;
 import net.tracystacktrace.mamasrecipes.crawler.folder.FolderCrawlerException;
 import net.tracystacktrace.mamasrecipes.crawler.folder.FolderRecipesCrawler;
 import net.tracystacktrace.mamasrecipes.game.ReIndevLocalizer;
+import net.tracystacktrace.mamasrecipes.game.ReIndevOreDict;
 
 import java.io.File;
 
@@ -35,12 +36,31 @@ public class MamasRecipes extends Mod {
         }
     }
 
-    public static ItemStack convert(ItemDescription description) {
-        final ItemStack itemStack = new ItemStack(description.getItemID(), description.getCount(), description.getMeta());
+    public static ItemStack convertStrict(ItemDescription description) {
+        final ItemStack itemStack = new ItemStack(getAsInt(description.getItemIdentifier()), description.getCount(), description.getMeta());
         if (description.getDisplayName() != null) {
             itemStack.setItemName(description.getDisplayName());
         }
         return itemStack;
+    }
+
+    public static Object convertLoose(ItemDescription description) {
+        final String id = description.getItemIdentifier();
+        //process oreDict
+        if (id.startsWith("oreDict:")) {
+            final String data = id.split(":")[1];
+            return ReIndevOreDict.getFromList(data);
+        }
+
+        return convertStrict(description);
+    }
+
+    static int getAsInt(String s) {
+        try {
+            return Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static class MamasRecipesConfig {

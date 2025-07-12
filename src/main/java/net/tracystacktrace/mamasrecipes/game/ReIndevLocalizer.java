@@ -68,29 +68,55 @@ public class ReIndevLocalizer implements IEnvironment {
     }
 
     @Override
-    public @Nullable Integer getItemIDFromName(@NotNull String name, int meta, int count) {
-        //this is a protection from those who would push an int id as string
+    public @Nullable String getItemIDFromName(@NotNull String name, int meta, int count) {
+        //check for clear int ID
         if (name.matches("\\d+")) {
-            return this.processIntegerName(name);
+            final Integer processed = this.processIntegerName(name);
+            if (processed != null) {
+                return String.valueOf(processed.intValue());
+            }
+            return null;
         }
 
-        if(name.startsWith("tile.") || name.startsWith("item.")) {
-            return this.processVanillaName(name, meta, count);
+        //ore dict detection
+        if(name.startsWith("reindev:")) {
+            final String data = name.split(":")[1];
+            if(ReIndevOreDict.validateOreDict(data)) {
+                return "oreDict:" + data;
+            }
         }
 
-        return this.processPrefixedName(name);
+        //foxloader prefix based search
+        if (name.contains(":")) {
+            final Integer processed = this.processPrefixedName(name);
+            if (processed != null) {
+                return String.valueOf(processed.intValue());
+            }
+            return null;
+        }
+
+        //rind naming based
+        if (name.startsWith("tile.") || name.startsWith("item.")) {
+            final Integer processed = this.processVanillaName(name, meta, count);
+            if (processed != null) {
+                return String.valueOf(processed.intValue());
+            }
+            return null;
+        }
+
+        return null;
     }
 
     @Override
-    public boolean isValidItemID(int id) {
+    public @Nullable String getItemID(int id) {
         if (id < 1 || id >= Items.ITEMS_LIST.length) {
-            return false;
+            return null;
         }
-
         try {
-            return Items.ITEMS_LIST[id] != null;
+            final Item item = Items.ITEMS_LIST[id];
+            return String.valueOf(item.itemID);
         } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
-            return false;
+            return null;
         }
     }
 
@@ -106,10 +132,10 @@ public class ReIndevLocalizer implements IEnvironment {
                 int index = recipeShaped.getPattern().length;
                 for (Map.Entry<String, KeyedItemDescription> entry : recipeShaped.getKeys().entrySet()) {
                     collector[index++] = Character.valueOf(entry.getKey().charAt(0));
-                    collector[index++] = MamasRecipes.convert(entry.getValue());
+                    collector[index++] = MamasRecipes.convertLoose(entry.getValue());
                 }
 
-                CraftingManager.getInstance().addRecipe(MamasRecipes.convert(recipe.getResult()), collector);
+                CraftingManager.getInstance().addRecipe(MamasRecipes.convertStrict(recipe.getResult()), collector);
                 return;
             }
 
@@ -119,10 +145,10 @@ public class ReIndevLocalizer implements IEnvironment {
                 final Object[] collector = new Object[recipeShapeless.getInput().length];
 
                 for (int i = 0; i < collector.length; i++) {
-                    collector[i] = MamasRecipes.convert(recipeShapeless.getInput()[i]);
+                    collector[i] = MamasRecipes.convertLoose(recipeShapeless.getInput()[i]);
                 }
 
-                CraftingManager.getInstance().addShapelessRecipe(MamasRecipes.convert(recipe.getResult()), collector);
+                CraftingManager.getInstance().addShapelessRecipe(MamasRecipes.convertStrict(recipe.getResult()), collector);
                 return;
             }
         }
