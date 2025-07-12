@@ -1,6 +1,6 @@
-## How can I find an ID/metadata of an item?
+## How can I get data about the item and write an item descriptor of it?
 
-### I. Getting info from game
+### I. Getting data from the game
 
 First of all, launch a `ReIndev` instance. Open any world where you can open a creative menu, and take an item you want to get data about.
 
@@ -8,7 +8,7 @@ Let's assume, you want to get information about `Orange Stucco` with a count of 
 
 The tooltip should show an extended info:
 
-![Image of tooltip 1](https://github.com/tracystacktrace/mamasrecipes-reindev/raw/main/docs/tooltip_1.png)
+![Image of tooltip 1](https://github.com/tracystacktrace/mamasrecipes-reindev/raw/main/docs/images/tooltip_1.png)
 
 The last line here is `#tile.stucco.orange:190,14`. Let's break down it into several parts:
 - `tile.stucco.orange`: is a string identifier of this item
@@ -17,7 +17,7 @@ The last line here is `#tile.stucco.orange:190,14`. Let's break down it into sev
 
 Sometimes the tooltip may not show the metadata value (see image below). This basically means the metadata is `0` or is ignored.
 
-![Image of tooltip 2](https://github.com/tracystacktrace/mamasrecipes-reindev/raw/main/docs/tooltip_2.png)
+![Image of tooltip 2](https://github.com/tracystacktrace/mamasrecipes-reindev/raw/main/docs/images/tooltip_2.png)
 
 ### II. Writing an item description
 
@@ -48,9 +48,22 @@ In this example, I'll put `2` for `"count"` and `14` for `"meta"`.
 }
 ```
 
-### Other examples
+### III. EXTRA! Adding custom display names
 
-![Example 1](https://github.com/tracystacktrace/mamasrecipes-reindev/raw/main/docs/example_tooltip_1.png)
+If you want to add a custom display name for your craft result item, you can add it via `"displayName"` attribute:
+
+```json5
+{
+  "item": "item.diamond_sword",
+  "displayName": "Cool Diamond Sword"
+}
+```
+
+## Other examples
+
+---
+
+![Example 1](https://github.com/tracystacktrace/mamasrecipes-reindev/raw/main/docs/images/example_tooltip_1.png)
 
 ```json5
 {
@@ -65,7 +78,7 @@ In this example, I'll put `2` for `"count"` and `14` for `"meta"`.
 
 ---
 
-![Example 2](https://github.com/tracystacktrace/mamasrecipes-reindev/raw/main/docs/example_tooltip_2.png)
+![Example 2](https://github.com/tracystacktrace/mamasrecipes-reindev/raw/main/docs/images/example_tooltip_2.png)
 
 ```json5
 {
@@ -82,7 +95,7 @@ In this example, I'll put `2` for `"count"` and `14` for `"meta"`.
 
 ---
 
-![Example 3](https://github.com/tracystacktrace/mamasrecipes-reindev/raw/main/docs/example_tooltip_3.png)
+![Example 3](https://github.com/tracystacktrace/mamasrecipes-reindev/raw/main/docs/images/example_tooltip_3.png)
 
 ```json5
 {

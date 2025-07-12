@@ -2,20 +2,22 @@
 
 A FoxLoader (ReIndev) modification designed to provide fetch-able JSON recipes support!
 
-Uses [own core library](https://github.com/tracystacktrace/mamasrecipes) to provide JSON recipes parse and load functions.
+Uses [own core library](https://github.com/tracystacktrace/mamasrecipes) to provide JSON based recipe processing functions.
 
 ## Creating Recipes
 
-### Quick Introduction
+**Please use these resources for additional info or for specific situations:**
+- [How can I get data about the item and write an item descriptor of it?](https://github.com/tracystacktrace/mamasrecipes-reindev/blob/main/docs/FIND_ID_REINDEV.md#how-can-i-find-an-idmetadata-of-an-item)
+- [How can I test my recipe or load it in game?]()
 
-So, this mod currently support 5 recipe types for `ReIndev`:
+This mod currently support 5 recipe types for `ReIndev`:
 - `crafting_shaped`: shaped crafting on workbench
 - `crafting_shapeless`: shapeless crafting on workbench
 - `furnace`: smelting items in furnace
 - `forge`: smelting items in forge
-- `refridgifreezer`: smelting items in refridgifreezer
+- `refridgifreezer`: smelting/freezing items in refridgifreezer
 
-Each one has similar `.json` structures, but end up having different stuff within
+Each one has similar `.json` structures, but end up having slightly different content.
 
 ### Item descriptor
 
@@ -31,7 +33,7 @@ The full item descriptor instance looks like this:
 }
 ```
 
-**[Please refer to this guide to obtain data and write own item descriptors!](https://github.com/tracystacktrace/mamasrecipes-reindev/blob/main/docs/FIND_ID_REINDEV.md#how-can-i-find-an-idmetadata-of-an-item)**
+For more information, please refer to [the dedicated guide page](https://github.com/tracystacktrace/mamasrecipes-reindev/blob/main/docs/FIND_ID_REINDEV.md).
 
 ## License
 
