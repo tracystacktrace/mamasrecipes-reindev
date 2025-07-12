@@ -1,6 +1,8 @@
 package net.tracystacktrace.mamasrecipes.game;
 
+import com.fox2code.foxloader.registry.GameRegistry;
 import com.google.gson.JsonObject;
+import net.minecraft.common.item.Item;
 import net.minecraft.common.item.Items;
 import net.minecraft.common.recipe.CraftingManager;
 import net.tracystacktrace.mamasrecipes.MamasRecipes;
@@ -14,19 +16,41 @@ import net.tracystacktrace.mamasrecipes.constructor.recipe.RecipeShapeless;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.Map;
-import java.util.Objects;
 
 public class ReIndevLocalizer implements ILocalization {
     @Override
     public @Nullable Integer getIDFromName(@NotNull String name) {
-        return Arrays.stream(Items.ITEMS_LIST).filter(Objects::nonNull).filter(i -> i.getItemName().equals(name)).map(i -> i.itemID).findFirst().orElse(null);
+        String prefix = "reindev"; //default
+        String suffix;
+
+        if (name.contains(":")) {
+            final String[] split_1 = name.trim().split(":");
+            prefix = split_1[0];
+            suffix = split_1[1];
+        } else {
+            suffix = name.trim();
+        }
+
+        if (suffix.startsWith("item.") || suffix.startsWith("tile.")) {
+            suffix = suffix.substring(5);
+        }
+
+        final Item result = GameRegistry.getRegisteredItem(prefix + ":" + suffix);
+        return result != null ? result.itemID : null;
     }
 
     @Override
     public boolean isValidItemID(int id) {
-        return id > 0 && id < Items.ITEMS_LIST.length;
+        if(id < 1 || id >= Items.ITEMS_LIST.length) {
+            return false;
+        }
+
+        try {
+            return Items.ITEMS_LIST[id] != null;
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
+            return false;
+        }
     }
 
     @Override
