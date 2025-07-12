@@ -8,7 +8,7 @@ Uses [own core library](https://github.com/tracystacktrace/mamasrecipes) to prov
 
 This mod currently support 5 recipe types for `ReIndev`:
 - `crafting_shaped`: [shaped crafting on workbench](https://github.com/tracystacktrace/mamasrecipes-reindev/blob/main/docs/WRITING_SHAPED_RECIPE.md)
-- `crafting_shapeless`: shapeless crafting on workbench
+- `crafting_shapeless`: [shapeless crafting on workbench](https://github.com/tracystacktrace/mamasrecipes-reindev/blob/main/docs/WRITING_SHAPELESS_RECIPE.md)
 - `furnace`: smelting items in furnace
 - `forge`: smelting items in forge
 - `refridgifreezer`: smelting/freezing items in refridgifreezer

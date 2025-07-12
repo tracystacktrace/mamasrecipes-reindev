@@ -1,5 +1,6 @@
 {
   "type": "crafting_shaped",
+  "name": "Recipe for that fish sword...",
   "pattern": [" XO", "XOX", "WX "],
   "keys": [
     {

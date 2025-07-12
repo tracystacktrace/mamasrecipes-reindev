@@ -1,11 +1,12 @@
 ## Writing a shaped crafting recipe
 
-### I. Getting known with scheme
+### I. Getting known with the scheme
 
 At first, let's look at the scheme of the `.json` file that contains a **shaped** recipe:
 ```json5
 {
   "type": "crafting_shaped", //the type of recipe
+  "name": "<recipe name>", //the name of recipe, NOT NEEDED, just to describe the recipe
   "pattern": [/* strings */], //pattern of a recipe
   "keys": [
     { /* item descriptor WITH A KEY */ },

@@ -1,0 +1,14 @@
+{
+  "type": "crafting_shapeless",
+  "keys": [
+    {
+      "item": "item.diamond_pickaxe"
+    },
+    {
+      "item": "item.obsidian_tool_repair_kit"
+    }
+  ],
+  "result": {
+    "item": "item.obsidian_pickaxe"
+  }
+}
