@@ -5,7 +5,10 @@ import com.google.gson.JsonObject;
 import net.minecraft.common.item.Item;
 import net.minecraft.common.item.ItemStack;
 import net.minecraft.common.item.Items;
+import net.minecraft.common.recipe.BlastFurnaceRecipes;
 import net.minecraft.common.recipe.CraftingManager;
+import net.minecraft.common.recipe.FurnaceRecipes;
+import net.minecraft.common.recipe.RefridgifreezerRecipes;
 import net.tracystacktrace.mamasrecipes.MamasRecipes;
 import net.tracystacktrace.mamasrecipes.bridge.IEnvironment;
 import net.tracystacktrace.mamasrecipes.constructor.RecipeProcessException;
@@ -40,7 +43,13 @@ public class ReIndevLocalizer implements IEnvironment {
     private @Nullable Integer processVanillaName(@NotNull String name, int meta, int count) {
         return Arrays.stream(Items.ITEMS_LIST)
                 .filter(Objects::nonNull)
-                .filter(i -> name.equals(i.getItemNameIS(new ItemStack(i.itemID, meta, count))) || name.equals(i.getItemName()))
+                .filter(i -> {
+                    try {
+                        return name.equals(i.getItemNameIS(new ItemStack(i.itemID, meta, count))) || name.equals(i.getItemName());
+                    } catch (Exception e) {
+                        return false;
+                    }
+                })
                 .findFirst()
                 .map(i -> i.itemID)
                 .orElse(null);
@@ -149,6 +158,36 @@ public class ReIndevLocalizer implements IEnvironment {
                 }
 
                 CraftingManager.getInstance().addShapelessRecipe(MamasRecipes.convertStrict(recipe.getResult()), collector);
+                return;
+            }
+
+            case "furnace": {
+                final RecipeDirectProcessing recipeFurnace = (RecipeDirectProcessing) recipe;
+
+                final ItemStack input = MamasRecipes.convertStrict(recipeFurnace.getInput());
+                final ItemStack output = MamasRecipes.convertStrict(recipeFurnace.getResult());
+
+                FurnaceRecipes.instance.addSmelting(FurnaceRecipes.instance.construct(input.getItemID(), input.getItemDamage()), output);
+                return;
+            }
+
+            case "forge": {
+                final RecipeDirectProcessing recipeFurnace = (RecipeDirectProcessing) recipe;
+
+                final ItemStack input = MamasRecipes.convertStrict(recipeFurnace.getInput());
+                final ItemStack output = MamasRecipes.convertStrict(recipeFurnace.getResult());
+
+                BlastFurnaceRecipes.instance.addSmelting(BlastFurnaceRecipes.instance.construct(input.getItemID(), input.getItemDamage()), output);
+                return;
+            }
+
+            case "refridgifreezer": {
+                final RecipeDirectProcessing recipeFurnace = (RecipeDirectProcessing) recipe;
+
+                final ItemStack input = MamasRecipes.convertStrict(recipeFurnace.getInput());
+                final ItemStack output = MamasRecipes.convertStrict(recipeFurnace.getResult());
+
+                RefridgifreezerRecipes.instance.addSmelting(RefridgifreezerRecipes.instance.construct(input.getItemID(), input.getItemDamage()), output);
                 return;
             }
         }

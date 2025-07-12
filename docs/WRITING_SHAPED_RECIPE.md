@@ -125,8 +125,8 @@ Next thing is to simply add everything we created to a combined json file:
 
 ```json5
 {
-  "type": "crafting_shaped", //the type of the recipe
-  "pattern": [" XO", "XOX", "WX "], //pattern of the recipe
+  "type": "crafting_shaped",
+  "pattern": [" XO", "XOX", "WX "],
   "keys": [
     {
       "key": "X",
