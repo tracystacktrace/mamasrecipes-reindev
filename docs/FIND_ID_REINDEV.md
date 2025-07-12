@@ -30,9 +30,9 @@ There's a schema for item description json:
 }
 ```
 
-For the identifier part (`item`), you can choose either using the string or the id integer.
-The `meta` and `count` parts act a little bit different: you can leave them ignored (not add into the json at all), and they'd be defaulted to `0` (for `meta`) and `1` (for `count`).
-In this example, I'll put `2` for `count` and `14` for `meta`.
+For the identifier part (`"item"`), you can choose either using the string or the id integer.
+The `"meta"` and `"count"` parts act a little bit different: you can leave them ignored (not add into the json at all), and they'd be defaulted to `0` (for `"meta"`) and `1` (for `"count"`).
+In this example, I'll put `2` for `"count"` and `14` for `"meta"`.
 ```json5
 {
   "item": "tile.stucco.orange", //the string identifier
@@ -48,4 +48,51 @@ In this example, I'll put `2` for `count` and `14` for `meta`.
 }
 ```
 
-That's... all for now!
+### Other examples
+
+![Example 1](https://github.com/tracystacktrace/mamasrecipes-reindev/raw/main/docs/example_tooltip_1.png)
+
+```json5
+{
+  "item": "item.bed"
+}
+```
+```json5
+{
+  "item": 355
+}
+```
+
+---
+
+![Example 2](https://github.com/tracystacktrace/mamasrecipes-reindev/raw/main/docs/example_tooltip_2.png)
+
+```json5
+{
+  "item": "item.fish.sakurakoi",
+  "meta": 14
+}
+```
+```json5
+{
+  "item": 414,
+  "meta": 14
+}
+```
+
+---
+
+![Example 3](https://github.com/tracystacktrace/mamasrecipes-reindev/raw/main/docs/example_tooltip_3.png)
+
+```json5
+{
+  "item": "tile.glowing_crimson_planks",
+  "count": 5
+}
+```
+```json5
+{
+  "item": 1324,
+  "count": 5
+}
+```

@@ -31,7 +31,7 @@ The full item descriptor instance looks like this:
 }
 ```
 
-**Please refer to this guide to obtain data and write own item descriptors!**
+**[Please refer to this guide to obtain data and write own item descriptors!](https://github.com/tracystacktrace/mamasrecipes-reindev/blob/main/docs/FIND_ID_REINDEV.md#how-can-i-find-an-idmetadata-of-an-item)**
 
 ## License
 
