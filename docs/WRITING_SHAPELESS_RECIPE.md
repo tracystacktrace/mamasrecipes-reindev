@@ -72,7 +72,7 @@ Next thing is to simply add everything we created to a combined json file:
 }
 ```
 
-That's all! Now you can test it by putting it in `config/mamasrecipes` folder [(see how)](https://github.com/tracystacktrace/mamasrecipes-reindev/blob/main/docs/WRITING_SHAPED_RECIPE.md).
+That's all! Now you can test it by putting it in `config/mamasrecipes` folder [(see how)](https://github.com/tracystacktrace/mamasrecipes-reindev/blob/main/docs/LOADING_RECIPE.md).
 
 [Get the `.json` file of this example!](https://github.com/tracystacktrace/mamasrecipes-reindev/blob/main/docs/examples/obsidian_pickaxe.json)
 

@@ -1,0 +1,9 @@
+{
+  "type": "refridgifreezer",
+  "input": {
+    "item": "item.slimeball"
+  },
+  "result": {
+    "item": "item.snowball"
+  }
+}

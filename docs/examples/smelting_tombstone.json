@@ -1,0 +1,9 @@
+{
+  "type": "furnace",
+  "input": {
+    "item": "tile.tombstone"
+  },
+  "result": {
+    "item": "tile.stone"
+  }
+}

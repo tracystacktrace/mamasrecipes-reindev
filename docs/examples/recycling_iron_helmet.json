@@ -1,0 +1,10 @@
+{
+	"type": "forge",
+	"input": {
+		"item": "item.iron_helmet"
+	},
+	"result": {
+		"item": "item.iron_ingot",
+		"count": 5
+	}
+}
