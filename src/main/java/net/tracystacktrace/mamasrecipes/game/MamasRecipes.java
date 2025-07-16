@@ -1,16 +1,17 @@
-package net.tracystacktrace.mamasrecipes;
+package net.tracystacktrace.mamasrecipes.game;
 
 import com.fox2code.foxloader.config.ConfigEntry;
 import com.fox2code.foxloader.loader.Mod;
 import com.fox2code.foxloader.loader.ModLoader;
 import net.minecraft.common.item.ItemStack;
 import net.tracystacktrace.mamasrecipes.constructor.item.ItemDescription;
-import net.tracystacktrace.mamasrecipes.crawler.folder.FolderCrawlerException;
-import net.tracystacktrace.mamasrecipes.crawler.folder.FolderRecipesCrawler;
-import net.tracystacktrace.mamasrecipes.game.ReIndevLocalizer;
-import net.tracystacktrace.mamasrecipes.game.ReIndevOreDict;
+import net.tracystacktrace.mamasrecipes.crawler.CrawlerException;
+import net.tracystacktrace.mamasrecipes.crawler.impl.FolderRecipesCrawler;
+import net.tracystacktrace.mamasrecipes.crawler.impl.ZipRecipesCrawler;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.zip.ZipFile;
 
 public class MamasRecipes extends Mod {
     public static final ReIndevLocalizer LOCALIZER = new ReIndevLocalizer();
@@ -21,16 +22,29 @@ public class MamasRecipes extends Mod {
         this.setConfigObject(CONFIG);
     }
 
+    @SuppressWarnings("ForLoopReplaceableByForEach")
     @Override
     public void onPostInit() {
         if (MamasRecipes.CONFIG.readLocalFolder) {
             final File recipesFolder = new File(ModLoader.getConfigFolder(), "mamasrecipes");
+            final File[] zipFiles = ZipIOHelper.collectZipFiles(recipesFolder);
+
+            for (int i = 0; i < zipFiles.length; i++) {
+                try (final ZipFile zipFile = new ZipFile(zipFiles[i])) {
+                    final ZipRecipesCrawler crawler = ZipRecipesCrawler.fromZip(LOCALIZER, zipFile);
+                    crawler.initializeRecipes(LOCALIZER);
+                } catch (IOException | CrawlerException e) {
+                    System.out.println("Failed to process zip recipes file: " + zipFiles[i].getName());
+                    e.printStackTrace();
+                }
+            }
+
             try {
                 final FolderRecipesCrawler crawler = FolderRecipesCrawler.fromFolder(LOCALIZER, recipesFolder);
                 if (crawler != null) {
                     crawler.initializeRecipes(LOCALIZER);
                 }
-            } catch (FolderCrawlerException e) {
+            } catch (CrawlerException e) {
                 throw new RuntimeException(e);
             }
         }

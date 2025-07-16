@@ -6,8 +6,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public final class ReIndevOreDict {
-    private ReIndevOreDict() {}
-
     public static boolean validateOreDict(@Nullable String input) {
         if (input == null || input.isEmpty()) {
             return false;

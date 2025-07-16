@@ -9,7 +9,6 @@ import net.minecraft.common.recipe.BlastFurnaceRecipes;
 import net.minecraft.common.recipe.CraftingManager;
 import net.minecraft.common.recipe.FurnaceRecipes;
 import net.minecraft.common.recipe.RefridgifreezerRecipes;
-import net.tracystacktrace.mamasrecipes.MamasRecipes;
 import net.tracystacktrace.mamasrecipes.bridge.IEnvironment;
 import net.tracystacktrace.mamasrecipes.constructor.RecipeProcessException;
 import net.tracystacktrace.mamasrecipes.constructor.item.ItemDescription;
@@ -26,7 +25,6 @@ import java.util.Map;
 import java.util.Objects;
 
 public class ReIndevLocalizer implements IEnvironment {
-
     private @Nullable Integer processIntegerName(@NotNull String name) {
         try {
             final int rawID = Integer.parseInt(name);

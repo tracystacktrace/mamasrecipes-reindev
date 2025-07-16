@@ -11,7 +11,7 @@ buildscript {
 apply plugin: 'foxloader.dev'
 
 group = 'net.tracystacktrace'
-version = '0.0.1'
+version = '0.1'
 
 configurations {
     implAndInclude
@@ -23,7 +23,7 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 
-    implAndInclude 'com.github.tracystacktrace:mamasrecipes:7e609c052d'
+    implAndInclude 'com.github.tracystacktrace:mamasrecipes:45a05575f7'
 }
 
 test {
